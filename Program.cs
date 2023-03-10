@@ -10,7 +10,7 @@ string[] InputStringArray(string text) // функция принимает ст
 {
     //Console.WriteLine(text);
 
-    var data = text.Split(",") //указывает программе на то, что разделителем в тексте является пробел
+    var data = text.Split(",") 
                 .Select(e => e = e.Replace(" ", string.Empty))
                // .Where(e => e.Length <= 3)                                                                    
                 .ToArray(); 
@@ -49,7 +49,7 @@ string[] toThreeAndLess(string[] arr)
 {
     int tempArrLength = arr.Length;
     string[] tempArr = new string[arr.Length];
-    int correctCount = 0;
+    //int correctCount = 0;
     int currPos = 0;
     //Console.WriteLine($"arr.Length = {arr.Length}");
     for(int i = 0; i < arr.Length; i++)
@@ -71,12 +71,12 @@ string[] toThreeAndLess(string[] arr)
     //Console.ReadLine();
 
     //printArray(tempArr, tempArr.Length);
-    correctCount = currPos;
+    //correctCount = currPos;
     //Console.WriteLine($"tempArr.Length = {tempArr.Length}, correctCount = {correctCount}");
     
 
-    string[] arrThreeAndLess = new string[correctCount];
-    for(int i = 0; i < correctCount; i++)
+    string[] arrThreeAndLess = new string[currPos];
+    for(int i = 0; i < currPos; i++)
     {
        //Console.WriteLine($"i = {i}, arrThreeAndLess[i] = {arrThreeAndLess[i]}, tempArr[i] = {tempArr[i]}");
         arrThreeAndLess[i] = tempArr[i];
@@ -151,7 +151,7 @@ void Test()
     Console.WriteLine();
 
     Console.WriteLine("Полученный массив:");
-    printArray(toThreeAndLess(strArray), strArray.Length);
+    printArray(toThreeAndLess(InputStringArray((text))),toThreeAndLess(InputStringArray((text))).Length);
 }
 
 Test();
