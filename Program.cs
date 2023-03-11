@@ -32,13 +32,16 @@ string[] InputStringArray(string textArg) //  включающий в себя �
 
 //===================================================================================================
 //Функция выводит в консоль строковый массив
-void printArray(string[] arr, int len)
+void printArray(string[] arr)
 {
     string strPrint = string.Empty;
-    for(int i = 0; i < len; i++)
-    {
-        strPrint = strPrint + arr[i] + ", ";    
-    }
+
+    
+        for(int i = 0; i < arr.Length; i++)
+        {
+            strPrint = strPrint + arr[i] + ", ";    
+        }
+   
     Console.WriteLine(strPrint);
 }
 
@@ -106,11 +109,11 @@ void mainMenu()
                 userChoice = string.Empty;
                 Console.WriteLine();
                 Console.WriteLine("Исходный массив:");
-                printArray(strTestArray, strTestArray.Length);
+                printArray(strTestArray);
                 Console.WriteLine();
                 strArray = toThreeAndLess(strTestArray);
                 Console.WriteLine("Новый массив, отвечающий требованиям:");
-                printArray(strArray, strArray.Length);
+                printArray(strArray);
 
                 pauseText();
 
@@ -129,12 +132,21 @@ void mainMenu()
                 strArray = InputStringArray(text);
                 Console.WriteLine();
                 Console.WriteLine("Введенная строка преобразована в массив: ");
-                printArray(strArray, strArray.Length);
+                printArray(strArray);
                 Console.WriteLine();
 
+                
                 strArray = toThreeAndLess(strArray);
-                Console.WriteLine("Новый массив, отвечающий требованиям:");
-                printArray(strArray, strArray.Length);
+
+                if(strArray.Length > 0)
+                {
+                    Console.WriteLine("Новый массив, отвечающий требованиям:");
+                    printArray(strArray);
+                }
+                else
+                {
+                    Console.WriteLine("Введенный массив не содержит отвечающих условиям значений.");
+                }
 
                 pauseText();
                 break;
@@ -196,11 +208,11 @@ void Test()
 
     strArray = InputStringArray(text);
     Console.WriteLine("Изначальный массив::");
-    printArray(strArray, strArray.Length);
+    printArray(strArray);
     Console.WriteLine();
 
     Console.WriteLine("Полученный массив:");
-    printArray(toThreeAndLess(InputStringArray((text))),toThreeAndLess(InputStringArray((text))).Length);
+    printArray(toThreeAndLess(InputStringArray((text))));
 }
 
 mainMenu();
