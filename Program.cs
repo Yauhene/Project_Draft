@@ -4,12 +4,10 @@ string[] strTestArray = new string[8]{"tree","kolobok", "words", "yes", "me", "a
 string[] strArray;
 string text = "tree, kolobok, words, Yes, me, add, one, bear" ;
 //===================================================================================================
-string[] InputStringArray(string text) // функция принимает строку из слов, разделенных запятыми
-                                    // и возвращает массив из этих слов, включающий в себя 
-                                    // слова, содержащие 3 и менее буквы
+// функция принимает строку из слов, разделенных запятыми и возвращает массив из этих слов,
+string[] InputStringArray(string text) //  включающий в себя слова, содержащие 3 и менее буквы                                   
+                                    
 {
-    //Console.WriteLine(text);
-
     var data = text.Split(",") 
                 .Select(e => e = e.Replace(" ", string.Empty))
                // .Where(e => e.Length <= 3)                                                                    
@@ -19,7 +17,7 @@ string[] InputStringArray(string text) // функция принимает ст
 }
 
 //===================================================================================================
-string fromArrayToString(string[] array) // функция преобразует массив в строку, вставляя запятые как разделитель между слов
+/*string fromArrayToString(string[] array) // функция преобразует массив в строку, вставляя запятые как разделитель между слов
 {
     string str = string.Empty;
     for(int i = 0; i < array.Length; i++)
@@ -29,16 +27,16 @@ string fromArrayToString(string[] array) // функция преобразуе�
    // Console.WriteLine(str);
     return str;
 }
+*/
 
 //===================================================================================================
-//Функция распечатывает строковый массив
+//Функция выводит в консоль строковый массив
 void printArray(string[] arr, int len)
 {
     string strPrint = string.Empty;
     for(int i = 0; i < len; i++)
     {
-        strPrint = strPrint + arr[i] + ", ";
-        
+        strPrint = strPrint + arr[i] + ", ";    
     }
     Console.WriteLine(strPrint);
 }
@@ -49,43 +47,27 @@ string[] toThreeAndLess(string[] arr)
 {
     int tempArrLength = arr.Length;
     string[] tempArr = new string[arr.Length];
-    //int correctCount = 0;
     int currPos = 0;
-    //Console.WriteLine($"arr.Length = {arr.Length}");
+    
     for(int i = 0; i < arr.Length; i++)
     {
-
         if (arr[i].Length <=3) 
         {
             tempArr[currPos] = arr[i];
-            currPos++;
-           
+            currPos++;   
         }
-
-        //Console.WriteLine($"i = {i}, currPos = {currPos}, arr[i] = {arr[i]}, tempArr[currPos] = {tempArr[currPos]}");
-        //Console.ReadLine();
-        
     }
-
-    //Console.WriteLine($"currPos = {currPos}, tempArr.Length = {tempArr.Length}");
-    //Console.ReadLine();
-
-    //printArray(tempArr, tempArr.Length);
-    //correctCount = currPos;
-    //Console.WriteLine($"tempArr.Length = {tempArr.Length}, correctCount = {correctCount}");
-    
 
     string[] arrThreeAndLess = new string[currPos];
     for(int i = 0; i < currPos; i++)
     {
-       //Console.WriteLine($"i = {i}, arrThreeAndLess[i] = {arrThreeAndLess[i]}, tempArr[i] = {tempArr[i]}");
         arrThreeAndLess[i] = tempArr[i];
     }
 
     return arrThreeAndLess;
 }
 
-void generalMethod()
+void mainMenu()
 {
     string userChoice = string.Empty;
 
@@ -95,28 +77,35 @@ void generalMethod()
     Console.WriteLine("1. Воспользоваться тестовым массивом, имеющимся в программе");
     Console.WriteLine("2. Ввести свой набор слов вручную");
     Console.WriteLine();
-    Console.WriteLine("Введите выбранный вариант (цифра '1' либо цифра '2')");
+    Console.WriteLine("Введите выбранный вариант (цифра '1' либо цифра '2') либо 'q' ('Q') ");
+    Console.WriteLine("    для выхода из программы.");
 
-    userChoice = Console.ReadLine();
-
-    
-    switch(userChoice)
+    while userChoice != 'Q' or userChoice != 'q'
     {
-        case "1":
+        userChoice = Console.ReadLine();
+
+        switch(userChoice)
         {
+            case "1":
+            {
 
-            break;
+                break;
+            }
+
+            case "2":
+            {
+
+                break;
+            }
+
+            case default:
+            {
+                Console.WriteLine("Ошибочный ввод, попробуйте ввести еще раз:");
+                break;
+            }
         }
-
-        case "2":
-        {
-
-            break;
-        }
-
-
     }
-    
+        
 }
 
 void Test()
@@ -154,4 +143,4 @@ void Test()
     printArray(toThreeAndLess(InputStringArray((text))),toThreeAndLess(InputStringArray((text))).Length);
 }
 
-Test();
+mainMenu();
