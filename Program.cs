@@ -2,13 +2,14 @@
 
 string[] strTestArray = new string[8]{"tree","kolobok", "words", "yes", "me", "add", "one", "bear"};
 string[] strArray;
-string text = "tree, kolobok, words, Yes, me, add, one, bear" ;
+string text = string.Empty;
+
 //===================================================================================================
 // функция принимает строку из слов, разделенных запятыми и возвращает массив из этих слов,
-string[] InputStringArray(string text) //  включающий в себя слова, содержащие 3 и менее буквы                                   
+string[] InputStringArray(string textArg) //  включающий в себя слова, содержащие 3 и менее буквы                                   
                                     
 {
-    var data = text.Split(",") 
+    var data = textArg.Split(",") 
                 .Select(e => e = e.Replace(" ", string.Empty))
                // .Where(e => e.Length <= 3)                                                                    
                 .ToArray(); 
@@ -67,44 +68,103 @@ string[] toThreeAndLess(string[] arr)
     return arrThreeAndLess;
 }
 
+void pauseText()
+{
+    Console.WriteLine();
+    Console.WriteLine("Нажмите клавишу Enter для продолжения...");
+    Console.ReadLine();
+    Console.WriteLine();
+}
+
 void mainMenu()
 {
     string userChoice = string.Empty;
+    bool getOut = false;
 
-    Console.WriteLine("Для работы программы необходим массив строковых переменных,");
-    Console.WriteLine("варианты формирования массива:");
-    Console.WriteLine();
-    Console.WriteLine("1. Воспользоваться тестовым массивом, имеющимся в программе");
-    Console.WriteLine("2. Ввести свой набор слов вручную");
-    Console.WriteLine();
-    Console.WriteLine("Введите выбранный вариант (цифра '1' либо цифра '2') либо 'q' ('Q') ");
-    Console.WriteLine("    для выхода из программы.");
+    
 
-    while userChoice != 'Q' or userChoice != 'q'
+    while (getOut != true)
     {
+        Console.Clear();
+
+        Console.WriteLine("Для работы программы необходим массив строковых переменных,");
+        Console.WriteLine("варианты формирования массива:");
+        Console.WriteLine();
+        Console.WriteLine("1. Воспользоваться тестовым массивом, имеющимся в программе");
+        Console.WriteLine("2. Ввести свой набор слов вручную");
+        Console.WriteLine();
+        Console.WriteLine("Введите выбранный вариант (цифра '1' либо цифра '2') либо 'q' ('Q') для выхода из программы.");
+        Console.WriteLine();
+
+        userChoice = string.Empty;
         userChoice = Console.ReadLine();
 
         switch(userChoice)
         {
             case "1":
             {
+                userChoice = string.Empty;
+                Console.WriteLine();
+                Console.WriteLine("Исходный массив:");
+                printArray(strTestArray, strTestArray.Length);
+                Console.WriteLine();
+                strArray = toThreeAndLess(strTestArray);
+                Console.WriteLine("Новый массив, отвечающий требованиям:");
+                printArray(strArray, strArray.Length);
+
+                pauseText();
 
                 break;
             }
 
             case "2":
             {
+                Console.WriteLine("Введите массив элементов строкового типа.");
+                Console.WriteLine("Для упрощения задачи достаточно ввести массив как строку, разделяя слова-элементы запятыми");
+                Console.WriteLine("Программа сама сформирует из них массив. Итак, Ваша строка: ");
+                Console.WriteLine();
 
+                text = Console.ReadLine();
+
+                strArray = InputStringArray(text);
+                Console.WriteLine();
+                Console.WriteLine("Введенная строка преобразована в массив: ");
+                printArray(strArray, strArray.Length);
+                Console.WriteLine();
+
+                strArray = toThreeAndLess(strArray);
+                Console.WriteLine("Новый массив, отвечающий требованиям:");
+                printArray(strArray, strArray.Length);
+
+                pauseText();
                 break;
             }
 
-            case default:
+            case "q":
+            {
+                Console.WriteLine("Программа завершает работу. Всего доброго!");
+                getOut = true;
+                break;
+            }
+        
+            case "Q":
+            {
+                Console.WriteLine("Программа завершает работу. Всего доброго!");
+                getOut = true;
+                break;
+            }
+
+            default:
             {
                 Console.WriteLine("Ошибочный ввод, попробуйте ввести еще раз:");
+                pauseText();
                 break;
             }
         }
     }
+    Console.WriteLine();
+    Console.Clear();
+
         
 }
 
